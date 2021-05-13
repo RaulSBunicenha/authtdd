@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate": "sequelize db:migrate",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore tests",
-    "test": "jest"
+    "pretest": "NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2"
