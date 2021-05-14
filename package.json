@@ -29,6 +29,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "factory-girl": "^5.0.4",
+    "faker": "^5.5.3",
     "jest": "^24.9.0",
     "nodemon": "^2.0.7",
     "sequelize-cli": "^6.2.0",
