@@ -1,15 +1,26 @@
+const request = require('supertest')
+const truncate = require('../utils/truncate')
+
+const app = require('../../src/app')
 const { User } = require('../../src/app/models')
 
 describe('Authentication', () => {
-  it('should sum two numbers', async () => {
+  beforeEach(async () => truncate())
+
+  it('should authenticate with valid credentials', async () => {
     const user = await User.create({
-      name: 'Raul Silva Bunicenha',
+      name: 'Raul',
       email: 'raulbunicenha@gmail.com',
-      password_hash: 'asdasldkajsdjsld'
+      password: '123123'
     })
 
-    console.log(user)
+    const response = await request(app)
+      .post('/sessions')
+      .send({
+        email: user.email,
+        password: '123456'
+      })
 
-    expect(user.email).toBe('raulbunicenha@gmail.com')
+    expect(response.status).toBe(200)
   })
 })
